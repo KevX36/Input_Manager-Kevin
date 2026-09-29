@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     //movement
 
     [SerializeField] private Vector2 MoveDirection;
-    public int speed = 5;
-    private int baseSpeed;
+    public float speed = 5;
+    private float baseSpeed;
     [SerializeField] private Vector3 move;
     //jump
     [SerializeField] Vector3 PlayerFall = new Vector3(0, 0, 0);
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     
 
-    public float GrabRange = 5;
+    
 
 
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         //I stole this from an old project so some things might be odd, I removed the unneeded parts
         
 
-        attack.SetActive(false);
+        
         
         
         baseSpeed = speed;
@@ -60,11 +60,11 @@ public class PlayerController : MonoBehaviour
         MoveDirection = rb.position;
         baseJumpHighet = JumpHighet;
     }
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnJump(InputValue input)
     {
-        InputAction input = context.action;
+        
         Debug.Log("started jump");
-        if (input.IsPressed())
+        if (input.isPressed)
         {
             if (isGrounded)
             {
@@ -79,10 +79,10 @@ public class PlayerController : MonoBehaviour
 
     }
     
-    public void OnMove(InputAction.CallbackContext Context)
+    public void OnMove(InputValue value)
     {
         Debug.Log("moving");
-        MoveDirection = Context.ReadValue<Vector2>();
+        MoveDirection = value.Get<Vector2>();
 
     }
     public bool cheakIfGrounded()
@@ -100,7 +100,14 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        
+        if (running && speed < baseSpeed*2)
+        {
+            speed += Time.deltaTime;
+        }
+        else if(!running && speed > baseSpeed)
+        {
+            speed -= Time.deltaTime;
+        }
         isGrounded = cheakIfGrounded();
         
         if (PlayerFall.y > 0 && !Jumping)
@@ -134,22 +141,20 @@ public class PlayerController : MonoBehaviour
         }
         rb.MovePosition(rb.position + move * speed * Time.deltaTime);
 
-        if(attacktimer >= 0)
-        {
-            attacktimer -= Time.deltaTime;
-        }
-        else
-        {
-            attack.SetActive(false);
-        }
+        
         
     }
-    public GameObject attack;
-    public float attacktimer = 0;
-    public void OnAttack(InputAction.CallbackContext Context)
+    public bool running;
+    public void OnRun(InputValue value)
     {
-        Debug.Log("attacked");
-        attack.SetActive(true);
-        attacktimer = 2;
+        Debug.Log("running");
+        if (value.isPressed)
+        {
+            running = true;
+        }
+        else if (!value.isPressed)
+        {
+            running = false;
+        }
     }
 }

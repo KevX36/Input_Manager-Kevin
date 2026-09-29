@@ -25,7 +25,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Run",
                     "type": "Button",
                     "id": "e266e77c-7091-4a5b-9bbf-93aa8ed65f9f",
                     "expectedControlType": "",
@@ -169,28 +169,51 @@
                 },
                 {
                     "name": "",
-                    "id": "189e28ea-7030-4cdc-aa15-719fdb43817f",
-                    "path": "<Mouse>/leftButton",
+                    "id": "39bcc9ad-01d8-46b0-a739-1f98ff6cf1a0",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "39bcc9ad-01d8-46b0-a739-1f98ff6cf1a0",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "49b8053e-664d-4d46-9202-bccc79c4aa6a",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keybored",
+            "bindingGroup": "Keybored",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
