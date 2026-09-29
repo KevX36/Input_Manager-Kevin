@@ -102,11 +102,11 @@ public class PlayerController : MonoBehaviour
     {
         if (running && speed < baseSpeed*2)
         {
-            speed += Time.deltaTime;
+            speed += Time.deltaTime*5;
         }
         else if(!running && speed > baseSpeed)
         {
-            speed -= Time.deltaTime;
+            speed -= Time.deltaTime*5;
         }
         isGrounded = cheakIfGrounded();
         
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
         {
             running = true;
         }
-        else if (!value.isPressed)
+        else
         {
             running = false;
         }
