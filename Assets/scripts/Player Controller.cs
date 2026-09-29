@@ -147,14 +147,17 @@ public class PlayerController : MonoBehaviour
     public bool running;
     public void OnRun(InputValue value)
     {
-        Debug.Log("running");
-        if (value.isPressed)
+        
+        
+        if (!running)
         {
             running = true;
+            Debug.Log("running");
         }
         else
         {
             running = false;
+            Debug.Log("not running");
         }
     }
 }
