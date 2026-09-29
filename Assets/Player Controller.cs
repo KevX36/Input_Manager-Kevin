@@ -47,10 +47,10 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-
+        //I stole this from an old project so some things might be odd, I removed the unneeded parts
         
 
-
+        attack.SetActive(false);
         
         
         baseSpeed = speed;
@@ -134,12 +134,22 @@ public class PlayerController : MonoBehaviour
         }
         rb.MovePosition(rb.position + move * speed * Time.deltaTime);
 
-
-
-
+        if(attacktimer >= 0)
+        {
+            attacktimer -= Time.deltaTime;
+        }
+        else
+        {
+            attack.SetActive(false);
+        }
+        
     }
+    public GameObject attack;
+    public float attacktimer = 0;
     public void OnAttack(InputAction.CallbackContext Context)
     {
         Debug.Log("attacked");
+        attack.SetActive(true);
+        attacktimer = 2;
     }
 }
